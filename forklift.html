@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inspeksi Forklift</title>
+    <style>
+        body { font-family: sans-serif; margin: 0; padding: 10px; background-color: #f0f0f0; }
+        .header { background-color: #084B66; color: white; text-align: center; padding: 15px; font-weight: bold; margin-bottom: 20px; border: 2px solid #000; }
+        .sub-header { font-size: 0.9rem; margin-bottom: 5px; font-weight: normal; text-transform: uppercase; }
+        .general-info { background: white; padding: 15px; border: 2px solid #084B66; margin-bottom: 20px; border-radius: 5px; }
+        .form-group { margin-bottom: 10px; }
+        .form-group label { display: block; font-weight: bold; margin-bottom: 5px; color: #084B66; }
+        .form-control { width: 95%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 1rem; }
+        .item-row { display: flex; justify-content: space-between; margin-bottom: 10px; gap: 5px; }
+        .label-box { background-color: #084B66; color: white; padding: 10px; border: 2px solid #000; flex: 2; display: flex; flex-direction: column; justify-content: center; font-size: 0.75rem; line-height: 1.2; }
+        .input-box { background-color: #084B66; color: white; border: 2px solid #000; flex: 2; padding: 10px; font-size: 0.9rem; }
+        .btn-foto-wrapper { background-color: #084B66; border: 2px solid #000; flex: 1; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+        .btn-text { color: white; text-decoration: underline; font-weight: bold; font-size: 0.8rem; }
+        .file-input { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; z-index: 10; }
+        .foto-ok { background-color: #28a745 !important; } 
+        .btn-submit { width:100%; padding: 15px; margin-top:20px; background: #084B66; color: white; font-weight: bold; border:none; cursor:pointer; font-size: 1rem; }
+        .btn-submit:disabled { background: #ccc; }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <div class="sub-header">Departemen Pengujian Peralatan Khusus ERM</div>
+        Inspeksi Forklift
+    </div>
+
+    <form id="formInspeksi">
+        <div class="general-info">
+            <div class="form-group"><label>Nama PT</label><input type="text" id="pt" class="form-control" placeholder="Contoh: PT. IMIP"></div>
+            <div class="form-group"><label>Departemen</label><input type="text" id="departemen" class="form-control" placeholder="Contoh: Utilities"></div>
+            <div class="form-group"><label>Area</label><input type="text" id="area" class="form-control" placeholder="Contoh: Smelter A"></div>
+            <div class="form-group"><label>Nomor Unit</label><input type="text" id="unit" class="form-control" placeholder="Contoh: FK-05"></div>
+            <div class="form-group"><label>Nama Penguji</label><input type="text" id="penguji" class="form-control" placeholder="Nama Anda"></div>
+        </div>
+
+        <div class="item-row" data-label="Rangka Retak/Rusak"><div class="label-box"><b>Komponen rangka utama retak/rusak</b><span style="color:#ccc;">车架主要受力构件开裂、损坏</span></div><input type="text" class="input-box" placeholder="Ket"><label class="btn-foto-wrapper"><span class="btn-text">foto</span><input type="file" class="file-input" accept="image/*" onchange="tandaiFoto(this)"></label></div>
+
+        <div class="item-row" data-label="Indikator Rusak"><div class="label-box"><b>Indikator rusak/tidak berfungsi</b><span style="color:#ccc;">仪表损坏、失效</span></div><input type="text" class="input-box" placeholder="Ket"><label class="btn-foto-wrapper"><span class="btn-text">foto</span><input type="file" class="file-input" accept="image/*" onchange="tandaiFoto(this)"></label></div>
+
+        <div class="item-row" data-label="Nameplat"><div class="label-box"><b>Nameplat tidak jelas/tidak ada</b><span style="color:#ccc;">铭牌模糊、缺失</span></div><input type="text" class="input-box" placeholder="Ket"><label class="btn-foto-wrapper"><span class="btn-text">foto</span><input type="file" class="file-input" accept="image/*" onchange="tandaiFoto(this)"></label></div>
+
+        <div class="item-row" data-label="Pengunci Poros Kemudi"><div class="label-box"><b>Pengunci poros kemudi rusak</b><span style="
