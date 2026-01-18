@@ -45,4 +45,99 @@
 
         <div class="item-row" data-label="Nameplat"><div class="label-box"><b>Nameplat tidak jelas/tidak ada</b><span style="color:#ccc;">铭牌模糊、缺失</span></div><input type="text" class="input-box" placeholder="Ket"><label class="btn-foto-wrapper"><span class="btn-text">foto</span><input type="file" class="file-input" accept="image/*" onchange="tandaiFoto(this)"></label></div>
 
-        <div class="item-row" data-label="Pengunci Poros Kemudi"><div class="label-box"><b>Pengunci poros kemudi rusak</b><span style="
+        <div class="item-row" data-label="Pengunci Poros Kemudi"><div class="label-box"><b>Pengunci poros kemudi rusak</b><span style="color:#ccc;">方向轴锁止装置失效、损坏</span></div><input type="text" class="input-box" placeholder="Ket"><label class="btn-foto-wrapper"><span class="btn-text">foto</span><input type="file" class="file-input" accept="image/*" onchange="tandaiFoto(this)"></label></div>
+
+        <div class="item-row" data-label="Kebocoran Roda Kemudi"><div class="label-box"><b>Kebocoran oli pada roda kemudi</b><span style="color:#ccc;">方向机或连接接头漏油</span></div><input type="text" class="input-box" placeholder="Ket"><label class="btn-foto-wrapper"><span class="btn-text">foto</span><input type="file" class="file-input" accept="image/*" onchange="tandaiFoto(this)"></label></div>
+
+        <div class="item-row" data-label="Area Mesin"><div class="label-box"><b>Bocor air/oli/debu di area mesin</b><span style="color:#ccc;">发动机区域漏水、漏油、积灰</span></div><input type="text" class="input-box" placeholder="Ket"><label class="btn-foto-wrapper"><span class="btn-text">foto</span><input type="file" class="file-input" accept="image/*" onchange="tandaiFoto(this)"></label></div>
+
+        <div class="item-row" data-label="Tangki Bahan Bakar"><div class="label-box"><b>Kebocoran Tangki Bahan Bakar</b><span style="color:#ccc;">燃油箱漏油</span></div><input type="text" class="input-box" placeholder="Ket"><label class="btn-foto-wrapper"><span class="btn-text">foto</span><input type="file" class="file-input" accept="image/*" onchange="tandaiFoto(this)"></label></div>
+
+        <div class="item-row" data-label="Oli Mesin"><div class="label-box"><b>Oli mesin hitam / pipa bocor</b><span style="color:#ccc;">机油发黑，油管接头漏油</span></div><input type="text" class="input-box" placeholder="Ket"><label class="btn-foto-wrapper"><span class="btn-text">foto</span><input type="file" class="file-input" accept="image/*" onchange="tandaiFoto(this)"></label></div>
+
+        <div class="item-row" data-label="Fuse Box"><div class="label-box"><b>Tidak ada pelindung Fuse Box</b><span style="color:#ccc;">继电器缺少防护</span></div><input type="text" class="input-box" placeholder="Ket"><label class="btn-foto-wrapper"><span class="btn-text">foto</span><input type="file" class="file-input" accept="image/*" onchange="tandaiFoto(this)"></label></div>
+
+        <div class="item-row" data-label="Silinder Hidrolik"><div class="label-box"><b>Bocor silinder angkat/kemudi/miring</b><span style="color:#ccc;">起升、转向、倾斜油缸漏油</span></div><input type="text" class="input-box" placeholder="Ket"><label class="btn-foto-wrapper"><span class="btn-text">foto</span><input type="file" class="file-input" accept="image/*" onchange="tandaiFoto(this)"></label></div>
+
+        <div class="item-row" data-label="Rem Parkir"><div class="label-box"><b>Kerusakan Rem Parkir</b><span style="color:#ccc;">驻车制动失效</span></div><input type="text" class="input-box" placeholder="Ket"><label class="btn-foto-wrapper"><span class="btn-text">foto</span><input type="file" class="file-input" accept="image/*" onchange="tandaiFoto(this)"></label></div>
+
+        <div class="item-row" data-label="Rem Servis"><div class="label-box"><b>Kegagalan Rem Servis (Jalan)</b><span style="color:#ccc;">行车制动失灵、失效</span></div><input type="text" class="input-box" placeholder="Ket"><label class="btn-foto-wrapper"><span class="btn-text">foto</span><input type="file" class="file-input" accept="image/*" onchange="tandaiFoto(this)"></label></div>
+
+        <div class="item-row" data-label="Sistem Lampu"><div class="label-box"><b>Lampu mati (Depan/Sen/Rem)</b><span style="color:#ccc;">灯光组（照明、转向、刹车等）失效</span></div><input type="text" class="input-box" placeholder="Ket"><label class="btn-foto-wrapper"><span class="btn-text">foto</span><input type="file" class="file-input" accept="image/*" onchange="tandaiFoto(this)"></label></div>
+
+
+        <button type="button" id="btnKirim" onclick="kirimData()" class="btn-submit">KIRIM DATA KE LAPTOP</button>
+        <p id="status" style="text-align:center; margin-top:10px; font-weight:bold;"></p>
+    </form>
+
+    <script>
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwxZjUN3HUjO8o6BDdYSJl7dvUChEUa-qFYo9_DoY07H3gwzCOOQ4GmQd8BFnKCY60C_A/exec"; 
+        const KODE_RAHASIA = "IMIP_AMAN_2026";
+
+        function tandaiFoto(input) {
+            if(input.files && input.files[0]) {
+                input.parentElement.classList.add('foto-ok');
+                input.parentElement.querySelector('.btn-text').innerText = "OK";
+            }
+        }
+
+        const toBase64 = file => new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => resolve(reader.result);
+            reader.onerror = error => reject(error);
+        });
+
+        async function kirimData() {
+            const btn = document.getElementById('btnKirim');
+            const status = document.getElementById('status');
+            const pt = document.getElementById('pt').value;
+            const dept = document.getElementById('departemen').value;
+            const unit = document.getElementById('unit').value;
+            const penguji = document.getElementById('penguji').value;
+
+            if(!pt || !dept || !unit || !penguji) { alert("Mohon lengkapi Data Umum dulu!"); return; }
+
+            btn.disabled = true; btn.innerText = "Mengirim..."; status.innerText = "Proses upload...";
+
+            let dataPaket = {
+                token: KODE_RAHASIA,
+                jenis_alat: "Forklift", // INI PENTING: Masuk ke Sheet Forklift
+                pt: pt,
+                departemen: dept,
+                area: document.getElementById('area').value,
+                unit: unit,
+                penguji: penguji,
+                items: []
+            };
+
+            const rows = document.querySelectorAll('.item-row');
+            for (let row of rows) {
+                const label = row.getAttribute('data-label');
+                const keterangan = row.querySelector('.input-box').value;
+                const fileInput = row.querySelector('.file-input');
+                let imageBase64 = "";
+                if (fileInput.files.length > 0) {
+                    try { imageBase64 = await toBase64(fileInput.files[0]); } catch (e) {}
+                }
+                dataPaket.items.push({ label: label, keterangan: keterangan || "-", image: imageBase64 });
+            }
+
+            fetch(SCRIPT_URL, {
+                method: "POST",
+                body: JSON.stringify(dataPaket)
+            })
+            .then(res => res.text())
+            .then(response => {
+                alert("Laporan Forklift Terkirim!");
+                window.location.href = "index.html";
+            })
+            .catch(err => {
+                console.error(err);
+                alert("Gagal kirim. Cek internet.");
+                btn.disabled = false; btn.innerText = "KIRIM DATA KE LAPTOP"; status.innerText = "Gagal.";
+            });
+        }
+    </script>
+</body>
+</html>
