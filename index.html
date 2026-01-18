@@ -9,7 +9,8 @@
         
         /* Header Judul */
         .header { background-color: #084B66; color: white; text-align: center; padding: 15px; font-weight: bold; margin-bottom: 20px; border: 2px solid #000; }
-        
+        .sub-header { font-size: 0.9rem; margin-bottom: 5px; font-weight: normal; text-transform: uppercase; }
+
         /* Section Data Umum (PT, Dept, dll) */
         .general-info { background: white; padding: 15px; border: 2px solid #084B66; margin-bottom: 20px; border-radius: 5px; }
         .form-group { margin-bottom: 10px; }
@@ -18,7 +19,7 @@
 
         /* Item Inspeksi */
         .item-row { display: flex; justify-content: space-between; margin-bottom: 10px; gap: 5px; }
-        .label-box { background-color: #084B66; color: white; padding: 10px; border: 2px solid #000; flex: 2; display: flex; align-items: center; font-size: 0.8rem; }
+        .label-box { background-color: #084B66; color: white; padding: 10px; border: 2px solid #000; flex: 2; display: flex; flex-direction: column; justify-content: center; font-size: 0.75rem; line-height: 1.2; }
         .input-box { background-color: #084B66; color: white; border: 2px solid #000; flex: 2; padding: 10px; font-size: 0.9rem; }
         .input-box::placeholder { color: #ccc; text-decoration: underline; }
         
@@ -56,7 +57,10 @@
 </head>
 <body>
 
-    <div class="header">Inspeksi Bejana Tekan</div>
+    <div class="header">
+        <div class="sub-header">Departemen Pengujian Peralatan Khusus ERM</div>
+        Inspeksi Bejana Tekan
+    </div>
 
     <form id="formInspeksi">
         
@@ -83,8 +87,11 @@
             </div>
         </div>
 
-        <div class="item-row" data-label="Name Plat">
-            <div class="label-box">Name Plat Tdk Jelas</div>
+        <div class="item-row" data-label="Korosi Badan Bejana">
+            <div class="label-box">
+                <b>Korosi pada Badan Bejana</b>
+                <span style="color:#ccc;">罐体腐蚀</span>
+            </div>
             <input type="text" class="input-box" placeholder="Keterangan">
             <label class="btn-foto-wrapper">
                 <span class="btn-text">foto</span>
@@ -92,8 +99,11 @@
             </label>
         </div>
 
-        <div class="item-row" data-label="Safety Valve">
-            <div class="label-box">Safety Valve Rusak</div>
+        <div class="item-row" data-label="Nameplate">
+            <div class="label-box">
+                <b>Nameplat tdk jelas/tdk ada</b>
+                <span style="color:#ccc;">铭牌模糊、缺失</span>
+            </div>
             <input type="text" class="input-box" placeholder="Keterangan">
             <label class="btn-foto-wrapper">
                 <span class="btn-text">foto</span>
@@ -101,8 +111,11 @@
             </label>
         </div>
 
-        <div class="item-row" data-label="Pressure Gauge">
-            <div class="label-box">Pressure Gauge Mati</div>
+        <div class="item-row" data-label="Tanda Arah Aliran">
+            <div class="label-box">
+                <b>Pipa inlet/outlet tdk ada arah aliran</b>
+                <span style="color:#ccc;">进出口管道未标明介质流向</span>
+            </div>
             <input type="text" class="input-box" placeholder="Keterangan">
             <label class="btn-foto-wrapper">
                 <span class="btn-text">foto</span>
@@ -110,8 +123,83 @@
             </label>
         </div>
 
-        <div class="item-row" data-label="Body Korosi">
-            <div class="label-box">Body Korosi</div>
+        <div class="item-row" data-label="Lapisan Anti Korosi">
+            <div class="label-box">
+                <b>Lapisan anti korosi rusak</b>
+                <span style="color:#ccc;">进出口管道未作防腐或防腐层损坏</span>
+            </div>
+            <input type="text" class="input-box" placeholder="Keterangan">
+            <label class="btn-foto-wrapper">
+                <span class="btn-text">foto</span>
+                <input type="file" class="file-input" accept="image/*" onchange="tandaiFoto(this)">
+            </label>
+        </div>
+
+        <div class="item-row" data-label="Penyangga Pipa">
+            <div class="label-box">
+                <b>Penyangga pipa longgar/rusak</b>
+                <span style="color:#ccc;">进出口管道支架松动、损坏</span>
+            </div>
+            <input type="text" class="input-box" placeholder="Keterangan">
+            <label class="btn-foto-wrapper">
+                <span class="btn-text">foto</span>
+                <input type="file" class="file-input" accept="image/*" onchange="tandaiFoto(this)">
+            </label>
+        </div>
+
+        <div class="item-row" data-label="Penyangga Tangki">
+            <div class="label-box">
+                <b>Peyangga tangki longgar/rusak</b>
+                <span style="color:#ccc;">罐体支座松动、损坏</span>
+            </div>
+            <input type="text" class="input-box" placeholder="Keterangan">
+            <label class="btn-foto-wrapper">
+                <span class="btn-text">foto</span>
+                <input type="file" class="file-input" accept="image/*" onchange="tandaiFoto(this)">
+            </label>
+        </div>
+
+        <div class="item-row" data-label="Perawatan Katup">
+            <div class="label-box">
+                <b>Katup pipa tdk dirawat</b>
+                <span style="color:#ccc;">进出口管道阀门未进行维护保养</span>
+            </div>
+            <input type="text" class="input-box" placeholder="Keterangan">
+            <label class="btn-foto-wrapper">
+                <span class="btn-text">foto</span>
+                <input type="file" class="file-input" accept="image/*" onchange="tandaiFoto(this)">
+            </label>
+        </div>
+
+        <div class="item-row" data-label="Cek Pressure Gauge">
+            <div class="label-box">
+                <b>Pressure gauge tdk diperiksa berkala</b>
+                <span style="color:#ccc;">压力表未定期效验</span>
+            </div>
+            <input type="text" class="input-box" placeholder="Keterangan">
+            <label class="btn-foto-wrapper">
+                <span class="btn-text">foto</span>
+                <input type="file" class="file-input" accept="image/*" onchange="tandaiFoto(this)">
+            </label>
+        </div>
+
+        <div class="item-row" data-label="Katup Pressure Gauge">
+            <div class="label-box">
+                <b>Tdk ada katup di Pressure gauge</b>
+                <span style="color:#ccc;">压力表与罐体之间未装设阀门</span>
+            </div>
+            <input type="text" class="input-box" placeholder="Keterangan">
+            <label class="btn-foto-wrapper">
+                <span class="btn-text">foto</span>
+                <input type="file" class="file-input" accept="image/*" onchange="tandaiFoto(this)">
+            </label>
+        </div>
+
+        <div class="item-row" data-label="Cek Safety Valve">
+            <div class="label-box">
+                <b>Safety valve tdk diperiksa berkala</b>
+                <span style="color:#ccc;">安全阀未定期效验</span>
+            </div>
             <input type="text" class="input-box" placeholder="Keterangan">
             <label class="btn-foto-wrapper">
                 <span class="btn-text">foto</span>
@@ -179,7 +267,7 @@
 
             const rows = document.querySelectorAll('.item-row');
 
-            // Loop semua item (Name plate, safety valve, dll)
+            // Loop semua item
             for (let row of rows) {
                 const label = row.getAttribute('data-label');
                 const keterangan = row.querySelector('.input-box').value;
@@ -194,10 +282,10 @@
                     }
                 }
 
-                // Masukkan ke array, meskipun kosong tetap dimasukkan agar urutan di Excel konsisten
+                // Masukkan ke array
                 dataPaket.items.push({
                     label: label,
-                    keterangan: keterangan || "-", // kalau kosong diisi strip
+                    keterangan: keterangan || "-", 
                     image: imageBase64
                 });
             }
@@ -223,3 +311,4 @@
     </script>
 </body>
 </html>
+
