@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inspeksi Bejana Tekan</title>
+    <style>
+        body { font-family: sans-serif; margin: 0; padding: 10px; background-color: #f0f0f0; }
+        
+        /* Header Judul */
+        .header { background-color: #084B66; color: white; text-align: center; padding: 15px; font-weight: bold; margin-bottom: 20px; border: 2px solid #000; }
+        
+        /* Section Data Umum (PT, Dept, dll) */
+        .general-info { background: white; padding: 15px; border: 2px solid #084B66; margin-bottom: 20px; border-radius: 5px; }
+        .form-group { margin-bottom: 10px; }
+        .form-group label { display: block; font-weight: bold; margin-bottom: 5px; color: #084B66; }
+        .form-control { width: 95%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 1rem; }
+
+        /* Item Inspeksi */
+        .item-row { display: flex; justify-content: space-between; margin-bottom: 10px; gap: 5px; }
+        .label-box { background-color: #084B66; color: white; padding: 10px; border: 2px solid #000; flex: 2; display: flex; align-items: center; font-size: 0.8rem; }
+        .input-box { background-color: #084B66; color: white; border: 2px solid #000; flex: 2; padding: 10px; font-size: 0.9rem; }
+        .input-box::placeholder { color: #ccc; text-decoration: underline; }
+        
+        /* Tombol Foto */
+        .btn-foto-wrapper { background-color: #084B66; border: 2px solid #000; flex: 1; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+        .btn-text { color: white; text-decoration: underline; font-weight: bold; font-size: 0.8rem; }
+        .file-input { position: absolute; opacity: 0; width: 100%; height: 100%; cursor: pointer; }
+        .foto-ok { background-color: #28a745 !important; } 
+
+        /* Tombol Kirim */
+        .btn-submit { width:100%; padding: 15px; margin-top:20px; background: #084B66; color: white; font-weight: bold; border:none; cursor:pointer; font-size: 1rem; }
+        .btn-submit:disabled { background: #ccc; }
+    </style>
+</head>
+<body>
+
+    <div class="header">Inspeksi Bejana Tekan</div>
+
+    <form id="formInspeksi">
+        
+        <div class="general-info">
+            <div class="form-group">
+                <label>Nama PT</label>
+                <input type="text" id="pt" class="form-control" placeholder="Contoh: PT. IMIP">
+            </div>
+            <div class="form-group">
+                <label>Departemen</label>
+                <input type="text" id="departemen" class="form-control" placeholder="Contoh: Utilities">
+            </div>
+            <div class="form-group">
+                <label>Area</label>
+                <input type="text" id="area" class="form-control" placeholder="Contoh: Smelter A">
+            </div>
+            <div class="form-group">
+                <label>Nomor Unit</label>
+                <input type="text" id="unit" class="form-control" placeholder="Contoh: COMP-01">
+            </div>
+            <div class="form-group">
+                <label>Nama Penguji</label>
+                <input type="text" id="penguji" class="form-control" placeholder="Nama Anda">
+            </div>
+        </div>
+
+        <div class="item-row" data-label="Name Plat">
+            <div class="label-box">Name Plat Tdk Jelas</div>
+            <input type="text" class="input-box" placeholder="Keterangan">
+            <label class="btn-foto-wrapper">
+                <span class="btn-text">foto</span>
+                <input type="file" class="file-input" accept="image/*" capture="environment" onchange="tandaiFoto(this)">
+            </label>
+        </div>
+
+        <div class="item-row" data-label="Safety Valve">
+            <div class="label-box">Safety Valve Rusak</div>
+            <input type="text" class="input-box" placeholder="Keterangan">
+            <label class="btn-foto-wrapper">
+                <span class="btn-text">foto</span>
+                <input type="file" class="file-input" accept="image/*" capture="environment" onchange="tandaiFoto(this)">
+            </label>
+        </div>
+
+        <div class="item-row" data-label="Pressure Gauge">
+            <div class="label-box">Pressure Gauge Mati</div>
+            <input type="text" class="input-box" placeholder="Keterangan">
+            <label class="btn-foto-wrapper">
+                <span class="btn-text">foto</span>
+                <input type="file" class="file-input" accept="image/*" capture="environment" onchange="tandaiFoto(this)">
+            </label>
+        </div>
+
+        <div class="item-row" data-label="Body Korosi">
+            <div class="label-box">Body Korosi</div>
+            <input type="text" class="input-box" placeholder="Keterangan">
+            <label class="btn-foto-wrapper">
+                <span class="btn-text">foto</span>
+                <input type="file" class="file-input" accept="image/*" capture="environment" onchange="tandaiFoto(this)">
+            </label>
+        </div>
+
+        <button type="button" id="btnKirim" onclick="kirimData()" class="btn-submit">
+            KIRIM DATA KE LAPTOP
+        </button>
+        <p id="status" style="text-align:center; margin-top:10px; font-weight:bold;"></p>
+    </form>
+
+    <script>
+        // MASUKKAN URL SCRIPT YANG SUDAH DI-DEPLOY DI SINI
+        // Contoh: "https://script.google.com/macros/s/AKfy.../exec"
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwxZjUN3HUjO8o6BDdYSJl7dvUChEUa-qFYo9_DoY07H3gwzCOOQ4GmQd8BFnKCY60C_A/exec"; 
+
+        function tandaiFoto(input) {
+            if(input.files && input.files[0]) {
+                input.parentElement.classList.add('foto-ok');
+                input.parentElement.querySelector('.btn-text').innerText = "OK";
+            }
+        }
+
+        const toBase64 = file => new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => resolve(reader.result);
+            reader.onerror = error => reject(error);
+        });
+
+        async function kirimData() {
+            const btn = document.getElementById('btnKirim');
+            const status = document.getElementById('status');
+
+            // Validasi Data Umum harus diisi
+            const pt = document.getElementById('pt').value;
+            const dept = document.getElementById('departemen').value;
+            const unit = document.getElementById('unit').value;
+            const penguji = document.getElementById('penguji').value;
+
+            if(!pt || !dept || !unit || !penguji) {
+                alert("Mohon lengkapi Data Umum (PT, Dept, Unit, Penguji) dulu!");
+                return;
+            }
+
+            if (SCRIPT_URL === "PASTE_URL_APPS_SCRIPT_DISINI" || SCRIPT_URL === "") {
+                alert("URL Script belum dipasang!");
+                return;
+            }
+
+            btn.disabled = true;
+            btn.innerText = "Mengirim...";
+            status.innerText = "Proses upload data & foto...";
+
+            // Siapkan Paket Data
+            let dataPaket = {
+                pt: pt,
+                departemen: dept,
+                area: document.getElementById('area').value,
+                unit: unit,
+                penguji: penguji,
+                items: []
+            };
+
+            const rows = document.querySelectorAll('.item-row');
+
+            // Loop semua item (Name plate, safety valve, dll)
+            for (let row of rows) {
+                const label = row.getAttribute('data-label');
+                const keterangan = row.querySelector('.input-box').value;
+                const fileInput = row.querySelector('.file-input');
+                
+                let imageBase64 = "";
+                if (fileInput.files.length > 0) {
+                    try {
+                        imageBase64 = await toBase64(fileInput.files[0]);
+                    } catch (e) {
+                        console.error("Gagal convert gambar", e);
+                    }
+                }
+
+                // Masukkan ke array, meskipun kosong tetap dimasukkan agar urutan di Excel konsisten
+                dataPaket.items.push({
+                    label: label,
+                    keterangan: keterangan || "-", // kalau kosong diisi strip
+                    image: imageBase64
+                });
+            }
+
+            // Kirim
+            fetch(SCRIPT_URL, {
+                method: "POST",
+                body: JSON.stringify(dataPaket)
+            })
+            .then(res => res.text())
+            .then(response => {
+                alert("Laporan Terkirim!");
+                location.reload(); 
+            })
+            .catch(err => {
+                console.error(err);
+                alert("Gagal kirim. Cek internet.");
+                btn.disabled = false;
+                btn.innerText = "KIRIM DATA KE LAPTOP";
+                status.innerText = "Gagal.";
+            });
+        }
+    </script>
+</body>
+</html>
