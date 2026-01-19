@@ -55,10 +55,10 @@
     </form>
 
     <script>
-        // PASTE URL SCRIPT KAMU DISINI
-        const SCRIPT_URL = https://script.google.com/macros/s/AKfycbxSNOkC20sE-XF_6D5oRO9DAk_2T1zTZQbNscR03sSCmOZreTMPzkVedrmoDOvZKg_U4A/exec"; 
+        // PERBAIKAN: TANDA KUTIP SUDAH DITAMBAHKAN DI DEPAN URL
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxSNOkC20sE-XF_6D5oRO9DAk_2T1zTZQbNscR03sSCmOZreTMPzkVedrmoDOvZKg_U4A/exec"; 
         
-        // KODE RAHASIA (Harus sama dengan di Google Script)
+        // KODE RAHASIA
         const KODE_RAHASIA = "IMIP_AMAN_2026";
 
         function tandaiFoto(input) {
@@ -88,7 +88,8 @@
             btn.disabled = true; btn.innerText = "Mengirim..."; status.innerText = "Proses upload...";
 
             let dataPaket = {
-                token: KODE_RAHASIA, // Kirim kunci ke server
+                token: KODE_RAHASIA,
+                jenis_alat: "Bejana", // PENTING: Penanda agar masuk ke Tab Bejana
                 pt: pt,
                 departemen: dept,
                 area: document.getElementById('area').value,
@@ -116,7 +117,7 @@
             .then(res => res.text())
             .then(response => {
                 alert("Laporan Terkirim!");
-                location.reload(); 
+                window.location.href = "index.html"; // Balik ke menu utama
             })
             .catch(err => {
                 console.error(err);
@@ -127,4 +128,3 @@
     </script>
 </body>
 </html>
-
