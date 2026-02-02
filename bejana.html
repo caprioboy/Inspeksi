@@ -7,8 +7,35 @@
     <style>
         body { font-family: sans-serif; margin: 0; padding: 10px; background-color: #f0f0f0; }
         
+        /* TOMBOL KEMBALI */
+        .btn-back {
+            display: inline-block;
+            background-color: #e2e6ea;
+            color: #084B66;
+            padding: 8px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.85rem;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+        }
+        .btn-back:active { background-color: #dbe2e8; }
+
         /* HEADER */
         .header { background-color: #084B66; color: white; text-align: center; padding: 15px; font-weight: bold; margin-bottom: 20px; border: 2px solid #000; }
+        
+        /* LOGO STYLE */
+        .logo-img {
+            max-width: 100px; 
+            height: auto;
+            display: block;
+            margin: 0 auto 10px auto; 
+            background-color: white; 
+            padding: 5px;
+            border-radius: 5px;
+        }
+
         .sub-header { font-size: 0.9rem; margin-bottom: 5px; font-weight: normal; text-transform: uppercase; }
         .cn-text-header { font-size: 0.8rem; opacity: 0.8; font-weight: normal; display: block; }
 
@@ -27,7 +54,7 @@
         .input-box { background-color: #084B66; color: white; border: 2px solid #000; flex: 2; padding: 10px; font-size: 0.9rem; }
         .btn-foto-wrapper { background-color: #084B66; border: 2px solid #000; flex: 1; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
         
-        /* UPDATE: Style Text Tombol Foto biar bisa atas bawah */
+        /* Style Text Tombol Foto */
         .btn-text { color: white; text-decoration: underline; font-weight: bold; font-size: 0.8rem; text-align: center; line-height: 1.1; }
         
         .file-input { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; z-index: 10; }
@@ -40,7 +67,13 @@
 </head>
 <body>
 
+    <a href="index.html" class="btn-back">
+        &larr; Kembali ke Menu (返回主菜单)
+    </a>
+
     <div class="header">
+        <img src="logo.png" alt="Logo ERM" class="logo-img">
+
         <div class="sub-header">
             Departemen Pengujian Peralatan Khusus ERM
             <span class="cn-text-header">ERM 特种设备检测部</span>
@@ -83,7 +116,7 @@
         </div>
 
         <div class="item-row" data-label="Nameplate">
-            <div class="label-box"><b>Nameplat tidak jelas/tidak ada</b><span class="cn-item">铭牌模糊、缺失</span></div>
+            <div class="label-box"><b>Nameplat tdk jelas/tdk ada</b><span class="cn-item">铭牌模糊、缺失</span></div>
             <input type="text" class="input-box" placeholder="Keterangan (备注)">
             <label class="btn-foto-wrapper">
                 <span class="btn-text">FOTO<br><span style="font-size:0.6rem; font-weight:normal; text-decoration:none;">拍照</span></span>
@@ -92,7 +125,7 @@
         </div>
 
         <div class="item-row" data-label="Tanda Arah Aliran">
-            <div class="label-box"><b>Pipa inlet/outlet tidak ada arah aliran</b><span class="cn-item">进出口管道未标明介质流向</span></div>
+            <div class="label-box"><b>Pipa inlet/outlet tdk ada arah aliran</b><span class="cn-item">进出口管道未标明介质流向</span></div>
             <input type="text" class="input-box" placeholder="Keterangan (备注)">
             <label class="btn-foto-wrapper">
                 <span class="btn-text">FOTO<br><span style="font-size:0.6rem; font-weight:normal; text-decoration:none;">拍照</span></span>
@@ -128,7 +161,7 @@
         </div>
 
         <div class="item-row" data-label="Perawatan Katup">
-            <div class="label-box"><b>Katup pipa tidak dirawat</b><span class="cn-item">进出口管道阀门未进行维护保养</span></div>
+            <div class="label-box"><b>Katup pipa tdk dirawat</b><span class="cn-item">进出口管道阀门未进行维护保养</span></div>
             <input type="text" class="input-box" placeholder="Keterangan (备注)">
             <label class="btn-foto-wrapper">
                 <span class="btn-text">FOTO<br><span style="font-size:0.6rem; font-weight:normal; text-decoration:none;">拍照</span></span>
@@ -137,7 +170,7 @@
         </div>
 
         <div class="item-row" data-label="Cek Pressure Gauge">
-            <div class="label-box"><b>Pressure gauge tidak diperiksa berkala</b><span class="cn-item">压力表未定期效验</span></div>
+            <div class="label-box"><b>Pressure gauge tdk diperiksa berkala</b><span class="cn-item">压力表未定期效验</span></div>
             <input type="text" class="input-box" placeholder="Keterangan (备注)">
             <label class="btn-foto-wrapper">
                 <span class="btn-text">FOTO<br><span style="font-size:0.6rem; font-weight:normal; text-decoration:none;">拍照</span></span>
@@ -146,7 +179,7 @@
         </div>
 
         <div class="item-row" data-label="Katup Pressure Gauge">
-            <div class="label-box"><b>tidak ada katup di Pressure gauge</b><span class="cn-item">压力表与罐体之间未装设阀门</span></div>
+            <div class="label-box"><b>Tdk ada katup di Pressure gauge</b><span class="cn-item">压力表与罐体之间未装设阀门</span></div>
             <input type="text" class="input-box" placeholder="Keterangan (备注)">
             <label class="btn-foto-wrapper">
                 <span class="btn-text">FOTO<br><span style="font-size:0.6rem; font-weight:normal; text-decoration:none;">拍照</span></span>
@@ -155,7 +188,7 @@
         </div>
 
         <div class="item-row" data-label="Cek Safety Valve">
-            <div class="label-box"><b>Safety valve tidak diperiksa berkala</b><span class="cn-item">安全阀未定期效验</span></div>
+            <div class="label-box"><b>Safety valve tdk diperiksa berkala</b><span class="cn-item">安全阀未定期效验</span></div>
             <input type="text" class="input-box" placeholder="Keterangan (备注)">
             <label class="btn-foto-wrapper">
                 <span class="btn-text">FOTO<br><span style="font-size:0.6rem; font-weight:normal; text-decoration:none;">拍照</span></span>
@@ -241,4 +274,3 @@
     </script>
 </body>
 </html>
-
