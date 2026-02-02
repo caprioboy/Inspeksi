@@ -38,11 +38,12 @@
         }
 
         .header h1 { margin: 0; font-size: 1.1rem; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; line-height: 1.4; }
-        .header h2 { margin: 5px 0 0; font-size: 0.9rem; font-weight: normal; opacity: 0.9; }
+        .header h2 { margin: 10px 0 0; font-size: 0.9rem; font-weight: normal; opacity: 0.9; line-height: 1.3; }
         
-        /* Teks Mandarin di Header */
+        /* Teks Mandarin di Header (Judul Utama & Sub Judul) */
         .cn-header-main { font-size: 0.9rem; font-weight: normal; display: block; margin-top: 2px; }
-        .cn-header-sub { font-size: 0.8rem; opacity: 0.8; margin-left: 5px; }
+        /* UPDATE: Dibuat block agar turun ke bawah */
+        .cn-header-sub { font-size: 0.8rem; opacity: 0.8; display: block; margin-top: 2px; }
 
         /* CONTAINER MENU */
         .menu-container {
@@ -63,7 +64,7 @@
             background: white;
             border: 2px solid #084B66;
             color: #084B66;
-            padding: 15px 20px; /* Padding sedikit disesuaikan */
+            padding: 15px 20px; 
             text-decoration: none;
             border-radius: 10px;
             display: flex;
@@ -126,7 +127,7 @@
             <span class="cn-header-main"> 特种设备检测部</span>
         </h1>
         <h2>
-            Portal Inspeksi Digital 
+            Portal Inspeksi Digital <br>
             <span class="cn-header-sub">数字化检验门户</span>
         </h2>
     </div>
