@@ -6,19 +6,31 @@
     <title>Inspeksi Bejana Tekan</title>
     <style>
         body { font-family: sans-serif; margin: 0; padding: 10px; background-color: #f0f0f0; }
+        
+        /* HEADER */
         .header { background-color: #084B66; color: white; text-align: center; padding: 15px; font-weight: bold; margin-bottom: 20px; border: 2px solid #000; }
         .sub-header { font-size: 0.9rem; margin-bottom: 5px; font-weight: normal; text-transform: uppercase; }
+        .cn-text-header { font-size: 0.8rem; opacity: 0.8; font-weight: normal; display: block; }
+
+        /* FORM UMUM */
         .general-info { background: white; padding: 15px; border: 2px solid #084B66; margin-bottom: 20px; border-radius: 5px; }
         .form-group { margin-bottom: 10px; }
         .form-group label { display: block; font-weight: bold; margin-bottom: 5px; color: #084B66; }
+        .cn-label { font-weight: normal; color: #666; font-size: 0.85rem; margin-left: 5px; } /* Style Mandarin di Form */
         .form-control { width: 95%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 1rem; }
+
+        /* ITEM INSPEKSI */
         .item-row { display: flex; justify-content: space-between; margin-bottom: 10px; gap: 5px; }
         .label-box { background-color: #084B66; color: white; padding: 10px; border: 2px solid #000; flex: 2; display: flex; flex-direction: column; justify-content: center; font-size: 0.75rem; line-height: 1.2; }
+        .cn-item { color: #ccc; font-size: 0.7rem; display: block; margin-top: 2px; } /* Style Mandarin di Item */
+        
         .input-box { background-color: #084B66; color: white; border: 2px solid #000; flex: 2; padding: 10px; font-size: 0.9rem; }
         .btn-foto-wrapper { background-color: #084B66; border: 2px solid #000; flex: 1; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
         .btn-text { color: white; text-decoration: underline; font-weight: bold; font-size: 0.8rem; }
         .file-input { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; z-index: 10; }
         .foto-ok { background-color: #28a745 !important; } 
+        
+        /* TOMBOL KIRIM */
         .btn-submit { width:100%; padding: 15px; margin-top:20px; background: #084B66; color: white; font-weight: bold; border:none; cursor:pointer; font-size: 1rem; }
         .btn-submit:disabled { background: #ccc; }
     </style>
@@ -26,39 +38,107 @@
 <body>
 
     <div class="header">
-        <div class="sub-header">Departemen Pengujian Peralatan Khusus ERM</div>
+        <div class="sub-header">
+            Departemen Pengujian Peralatan Khusus ERM
+            <span class="cn-text-header">ERM 特种设备检测部</span>
+        </div>
         Inspeksi Bejana Tekan
+        <span class="cn-text-header">压力容器检验</span>
     </div>
 
     <form id="formInspeksi">
         <div class="general-info">
-            <div class="form-group"><label>Nama PT</label><input type="text" id="pt" class="form-control" placeholder="Contoh: PT. IMIP"></div>
-            <div class="form-group"><label>Departemen</label><input type="text" id="departemen" class="form-control" placeholder="Contoh: Utilities"></div>
-            <div class="form-group"><label>Area</label><input type="text" id="area" class="form-control" placeholder="Contoh: Smelter A"></div>
-            <div class="form-group"><label>Nomor Unit</label><input type="text" id="unit" class="form-control" placeholder="Contoh: COMP-01"></div>
-            <div class="form-group"><label>Nama Penguji</label><input type="text" id="penguji" class="form-control" placeholder="Nama Anda"></div>
+            <div class="form-group">
+                <label>Perusahaan <span class="cn-label">公司</span></label>
+                <input type="text" id="pt" class="form-control" placeholder="Contoh: PT. IMIP">
+            </div>
+            <div class="form-group">
+                <label>Departemen <span class="cn-label">部门</span></label>
+                <input type="text" id="departemen" class="form-control" placeholder="Contoh: Utilities">
+            </div>
+            <div class="form-group">
+                <label>Area <span class="cn-label">区域</span></label>
+                <input type="text" id="area" class="form-control" placeholder="Contoh: Smelter A">
+            </div>
+            <div class="form-group">
+                <label>Nomor Unit <span class="cn-label">设备编号</span></label>
+                <input type="text" id="unit" class="form-control" placeholder="Contoh: COMP-01">
+            </div>
+            <div class="form-group">
+                <label>Nama Penguji <span class="cn-label">检验员</span></label>
+                <input type="text" id="penguji" class="form-control" placeholder="Nama Anda">
+            </div>
         </div>
 
-        <div class="item-row" data-label="Korosi Badan Bejana"><div class="label-box"><b>Korosi pada Badan Bejana</b><span style="color:#ccc;">罐体腐蚀</span></div><input type="text" class="input-box" placeholder="Keterangan"><label class="btn-foto-wrapper"><span class="btn-text">foto</span><input type="file" class="file-input" accept="image/*" onchange="tandaiFoto(this)"></label></div>
-        <div class="item-row" data-label="Nameplate"><div class="label-box"><b>Nameplat tdk jelas/tdk ada</b><span style="color:#ccc;">铭牌模糊、缺失</span></div><input type="text" class="input-box" placeholder="Keterangan"><label class="btn-foto-wrapper"><span class="btn-text">foto</span><input type="file" class="file-input" accept="image/*" onchange="tandaiFoto(this)"></label></div>
-        <div class="item-row" data-label="Tanda Arah Aliran"><div class="label-box"><b>Pipa inlet/outlet tdk ada arah aliran</b><span style="color:#ccc;">进出口管道未标明介质流向</span></div><input type="text" class="input-box" placeholder="Keterangan"><label class="btn-foto-wrapper"><span class="btn-text">foto</span><input type="file" class="file-input" accept="image/*" onchange="tandaiFoto(this)"></label></div>
-        <div class="item-row" data-label="Lapisan Anti Korosi"><div class="label-box"><b>Lapisan anti korosi rusak</b><span style="color:#ccc;">进出口管道未作防腐或防腐层损坏</span></div><input type="text" class="input-box" placeholder="Keterangan"><label class="btn-foto-wrapper"><span class="btn-text">foto</span><input type="file" class="file-input" accept="image/*" onchange="tandaiFoto(this)"></label></div>
-        <div class="item-row" data-label="Penyangga Pipa"><div class="label-box"><b>Penyangga pipa longgar/rusak</b><span style="color:#ccc;">进出口管道支架松动、损坏</span></div><input type="text" class="input-box" placeholder="Keterangan"><label class="btn-foto-wrapper"><span class="btn-text">foto</span><input type="file" class="file-input" accept="image/*" onchange="tandaiFoto(this)"></label></div>
-        <div class="item-row" data-label="Penyangga Tangki"><div class="label-box"><b>Peyangga tangki longgar/rusak</b><span style="color:#ccc;">罐体支座松动、损坏</span></div><input type="text" class="input-box" placeholder="Keterangan"><label class="btn-foto-wrapper"><span class="btn-text">foto</span><input type="file" class="file-input" accept="image/*" onchange="tandaiFoto(this)"></label></div>
-        <div class="item-row" data-label="Perawatan Katup"><div class="label-box"><b>Katup pipa tdk dirawat</b><span style="color:#ccc;">进出口管道阀门未进行维护保养</span></div><input type="text" class="input-box" placeholder="Keterangan"><label class="btn-foto-wrapper"><span class="btn-text">foto</span><input type="file" class="file-input" accept="image/*" onchange="tandaiFoto(this)"></label></div>
-        <div class="item-row" data-label="Cek Pressure Gauge"><div class="label-box"><b>Pressure gauge tdk diperiksa berkala</b><span style="color:#ccc;">压力表未定期效验</span></div><input type="text" class="input-box" placeholder="Keterangan"><label class="btn-foto-wrapper"><span class="btn-text">foto</span><input type="file" class="file-input" accept="image/*" onchange="tandaiFoto(this)"></label></div>
-        <div class="item-row" data-label="Katup Pressure Gauge"><div class="label-box"><b>Tdk ada katup di Pressure gauge</b><span style="color:#ccc;">压力表与罐体之间未装设阀门</span></div><input type="text" class="input-box" placeholder="Keterangan"><label class="btn-foto-wrapper"><span class="btn-text">foto</span><input type="file" class="file-input" accept="image/*" onchange="tandaiFoto(this)"></label></div>
-        <div class="item-row" data-label="Cek Safety Valve"><div class="label-box"><b>Safety valve tdk diperiksa berkala</b><span style="color:#ccc;">安全阀未定期效验</span></div><input type="text" class="input-box" placeholder="Keterangan"><label class="btn-foto-wrapper"><span class="btn-text">foto</span><input type="file" class="file-input" accept="image/*" onchange="tandaiFoto(this)"></label></div>
+        <div class="item-row" data-label="Korosi Badan Bejana">
+            <div class="label-box"><b>Korosi pada Badan Bejana</b><span class="cn-item">罐体腐蚀</span></div>
+            <input type="text" class="input-box" placeholder="Keterangan">
+            <label class="btn-foto-wrapper"><span class="btn-text">foto</span><input type="file" class="file-input" accept="image/*" onchange="tandaiFoto(this)"></label>
+        </div>
 
-        <button type="button" id="btnKirim" onclick="kirimData()" class="btn-submit">KIRIM </button>
+        <div class="item-row" data-label="Nameplate">
+            <div class="label-box"><b>Nameplat tdk jelas/tdk ada</b><span class="cn-item">铭牌模糊、缺失</span></div>
+            <input type="text" class="input-box" placeholder="Keterangan">
+            <label class="btn-foto-wrapper"><span class="btn-text">foto</span><input type="file" class="file-input" accept="image/*" onchange="tandaiFoto(this)"></label>
+        </div>
+
+        <div class="item-row" data-label="Tanda Arah Aliran">
+            <div class="label-box"><b>Pipa inlet/outlet tdk ada arah aliran</b><span class="cn-item">进出口管道未标明介质流向</span></div>
+            <input type="text" class="input-box" placeholder="Keterangan">
+            <label class="btn-foto-wrapper"><span class="btn-text">foto</span><input type="file" class="file-input" accept="image/*" onchange="tandaiFoto(this)"></label>
+        </div>
+
+        <div class="item-row" data-label="Lapisan Anti Korosi">
+            <div class="label-box"><b>Lapisan anti korosi rusak</b><span class="cn-item">进出口管道未作防腐或防腐层损坏</span></div>
+            <input type="text" class="input-box" placeholder="Keterangan">
+            <label class="btn-foto-wrapper"><span class="btn-text">foto</span><input type="file" class="file-input" accept="image/*" onchange="tandaiFoto(this)"></label>
+        </div>
+
+        <div class="item-row" data-label="Penyangga Pipa">
+            <div class="label-box"><b>Penyangga pipa longgar/rusak</b><span class="cn-item">进出口管道支架松动、损坏</span></div>
+            <input type="text" class="input-box" placeholder="Keterangan">
+            <label class="btn-foto-wrapper"><span class="btn-text">foto</span><input type="file" class="file-input" accept="image/*" onchange="tandaiFoto(this)"></label>
+        </div>
+
+        <div class="item-row" data-label="Penyangga Tangki">
+            <div class="label-box"><b>Peyangga tangki longgar/rusak</b><span class="cn-item">罐体支座松动、损坏</span></div>
+            <input type="text" class="input-box" placeholder="Keterangan">
+            <label class="btn-foto-wrapper"><span class="btn-text">foto</span><input type="file" class="file-input" accept="image/*" onchange="tandaiFoto(this)"></label>
+        </div>
+
+        <div class="item-row" data-label="Perawatan Katup">
+            <div class="label-box"><b>Katup pipa tdk dirawat</b><span class="cn-item">进出口管道阀门未进行维护保养</span></div>
+            <input type="text" class="input-box" placeholder="Keterangan">
+            <label class="btn-foto-wrapper"><span class="btn-text">foto</span><input type="file" class="file-input" accept="image/*" onchange="tandaiFoto(this)"></label>
+        </div>
+
+        <div class="item-row" data-label="Cek Pressure Gauge">
+            <div class="label-box"><b>Pressure gauge tdk diperiksa berkala</b><span class="cn-item">压力表未定期效验</span></div>
+            <input type="text" class="input-box" placeholder="Keterangan">
+            <label class="btn-foto-wrapper"><span class="btn-text">foto</span><input type="file" class="file-input" accept="image/*" onchange="tandaiFoto(this)"></label>
+        </div>
+
+        <div class="item-row" data-label="Katup Pressure Gauge">
+            <div class="label-box"><b>Tdk ada katup di Pressure gauge</b><span class="cn-item">压力表与罐体之间未装设阀门</span></div>
+            <input type="text" class="input-box" placeholder="Keterangan">
+            <label class="btn-foto-wrapper"><span class="btn-text">foto</span><input type="file" class="file-input" accept="image/*" onchange="tandaiFoto(this)"></label>
+        </div>
+
+        <div class="item-row" data-label="Cek Safety Valve">
+            <div class="label-box"><b>Safety valve tdk diperiksa berkala</b><span class="cn-item">安全阀未定期效验</span></div>
+            <input type="text" class="input-box" placeholder="Keterangan">
+            <label class="btn-foto-wrapper"><span class="btn-text">foto</span><input type="file" class="file-input" accept="image/*" onchange="tandaiFoto(this)"></label>
+        </div>
+
+        <button type="button" id="btnKirim" onclick="kirimData()" class="btn-submit">
+            KIRIM DATA <br>
+            <span style="font-size:0.8rem; font-weight:normal;">提交数据</span>
+        </button>
         <p id="status" style="text-align:center; margin-top:10px; font-weight:bold;"></p>
     </form>
 
     <script>
-        // PERBAIKAN: TANDA KUTIP SUDAH DITAMBAHKAN DI DEPAN URL
         const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxSNOkC20sE-XF_6D5oRO9DAk_2T1zTZQbNscR03sSCmOZreTMPzkVedrmoDOvZKg_U4A/exec"; 
-        
-        // KODE RAHASIA
         const KODE_RAHASIA = "IMIP_AMAN_2026";
 
         function tandaiFoto(input) {
@@ -85,11 +165,11 @@
 
             if(!pt || !dept || !unit || !penguji) { alert("Mohon lengkapi Data Umum dulu!"); return; }
 
-            btn.disabled = true; btn.innerText = "Mengirim..."; status.innerText = "Proses upload...";
+            btn.disabled = true; btn.innerText = "Mengirim (提交中)..."; status.innerText = "Proses upload...";
 
             let dataPaket = {
                 token: KODE_RAHASIA,
-                jenis_alat: "Bejana", // PENTING: Penanda agar masuk ke Tab Bejana
+                jenis_alat: "Bejana", 
                 pt: pt,
                 departemen: dept,
                 area: document.getElementById('area').value,
@@ -107,25 +187,4 @@
                 if (fileInput.files.length > 0) {
                     try { imageBase64 = await toBase64(fileInput.files[0]); } catch (e) {}
                 }
-                dataPaket.items.push({ label: label, keterangan: keterangan || "-", image: imageBase64 });
-            }
-
-            fetch(SCRIPT_URL, {
-                method: "POST",
-                body: JSON.stringify(dataPaket)
-            })
-            .then(res => res.text())
-            .then(response => {
-                alert("Laporan Terkirim!");
-                window.location.href = "index.html"; // Balik ke menu utama
-            })
-            .catch(err => {
-                console.error(err);
-                alert("Gagal kirim. Cek internet.");
-                btn.disabled = false; btn.innerText = "KIRIM DATA KE LAPTOP"; status.innerText = "Gagal.";
-            });
-        }
-    </script>
-</body>
-</html>
-
+                dataPaket.items.push({ label: label, keterangan:
