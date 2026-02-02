@@ -28,17 +28,21 @@
 
         /* PENGATURAN LOGO */
         .logo-img {
-            max-width: 120px; /* Ukuran logo pas, tidak kebesaran */
+            max-width: 120px; 
             height: auto;
             display: block;
-            margin: 0 auto 15px auto; /* Posisi tengah dan ada jarak ke tulisan bawahnya */
-            background-color: white; /* Opsional: Biar logo kotak putih kalau transparan */
+            margin: 0 auto 15px auto; 
+            background-color: white; 
             padding: 5px;
             border-radius: 5px;
         }
 
         .header h1 { margin: 0; font-size: 1.1rem; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; line-height: 1.4; }
         .header h2 { margin: 5px 0 0; font-size: 0.9rem; font-weight: normal; opacity: 0.9; }
+        
+        /* Teks Mandarin di Header */
+        .cn-header-main { font-size: 0.9rem; font-weight: normal; display: block; margin-top: 2px; }
+        .cn-header-sub { font-size: 0.8rem; opacity: 0.8; margin-left: 5px; }
 
         /* CONTAINER MENU */
         .menu-container {
@@ -48,7 +52,7 @@
             justify-content: center;
             padding: 20px;
             gap: 15px;
-            max-width: 500px; /* Biar di layar laptop tidak terlalu lebar */
+            max-width: 500px; 
             margin: 0 auto;
             width: 100%;
             box-sizing: border-box;
@@ -59,7 +63,7 @@
             background: white;
             border: 2px solid #084B66;
             color: #084B66;
-            padding: 20px;
+            padding: 15px 20px; /* Padding sedikit disesuaikan */
             text-decoration: none;
             border-radius: 10px;
             display: flex;
@@ -71,14 +75,35 @@
             box-shadow: 0 3px 5px rgba(0,0,0,0.1);
         }
 
+        /* Group Teks dalam Tombol */
+        .btn-text-group {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            text-align: left;
+        }
+
+        /* Teks Mandarin dalam Tombol */
+        .cn-text {
+            font-size: 0.85rem;
+            font-weight: normal;
+            margin-top: 3px;
+            color: #555;
+        }
+
         /* Efek saat tombol ditekan */
         .menu-btn:active {
             transform: scale(0.97);
             background-color: #084B66;
             color: white;
         }
+        
+        /* Ubah warna teks mandarin saat tombol ditekan */
+        .menu-btn:active .cn-text {
+            color: #ddd; 
+        }
 
-        .icon { font-size: 1.5rem; }
+        .icon { font-size: 1.8rem; }
 
         /* FOOTER */
         .footer {
@@ -96,29 +121,47 @@
     <div class="header">
         <img src="logo.png" alt="Logo ERM" class="logo-img">
         
-        <h1>Departemen Pengujian Peralatan Khusus ERM</h1>
-        <h2>Portal Inspeksi Digital</h2>
+        <h1>
+            Departemen Pengujian Peralatan Khusus ERM<br>
+            <span class="cn-header-main">ERM 特种设备检测部</span>
+        </h1>
+        <h2>
+            Portal Inspeksi Digital 
+            <span class="cn-header-sub">数字化检验门户</span>
+        </h2>
     </div>
 
     <div class="menu-container">
         
         <a href="bejana.html" class="menu-btn">
-            <span>Inspeksi Bejana Tekan</span>
+            <div class="btn-text-group">
+                <span>Inspeksi Bejana Tekan</span>
+                <span class="cn-text">压力容器检验</span>
+            </div>
             <span class="icon">🛢️</span>
         </a>
 
         <a href="conveyor.html" class="menu-btn">
-            <span>Inspeksi Conveyor</span>
+            <div class="btn-text-group">
+                <span>Inspeksi Conveyor</span>
+                <span class="cn-text">皮带机检验</span>
+            </div>
             <span class="icon">⚙️</span>
         </a>
 
         <a href="forklift.html" class="menu-btn">
-            <span>Inspeksi Forklift</span>
+            <div class="btn-text-group">
+                <span>Inspeksi Forklift</span>
+                <span class="cn-text">叉车检验</span>
+            </div>
             <span class="icon">🚜</span>
         </a>
         
         <a href="crane.html" class="menu-btn">
-            <span>Inspeksi Overhead Crane</span>
+            <div class="btn-text-group">
+                <span>Inspeksi Overhead Crane</span>
+                <span class="cn-text">桥式起重机检验</span>
+            </div>
             <span class="icon">🏗️</span>
         </a>
 
